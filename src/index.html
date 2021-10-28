@@ -1,0 +1,42 @@
+<html>
+  <body>
+    <h1>simple chat</h1>
+    <div>
+      <input id="inputText" type="text">
+      <input id="sendButton" type="submit">
+      <ul id="messageList" />
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      const clearText = () => {
+        document.getElementById('inputText').value = '';
+      }
+
+      const addMessageList = (message) => {
+        const ul = document.getElementById('messageList');
+        const li = document.createElement('li');
+        const text = document.createTextNode(message);
+        li.appendChild(text);
+        ul.appendChild(li);
+      };
+
+      document.getElementById('sendButton').addEventListener('click', () => {
+        let inputMessage = document.getElementById('inputText').value;
+
+        if (inputMessage === '') {
+          return;
+        }
+
+        socket.emit('sendMessage', inputMessage);
+        clearText();
+      });
+
+      socket.on('receiveMessage', (message) => {
+        addMessageList(message);
+      });
+    </script>
+  </body>
+</html>
