@@ -18,7 +18,7 @@ $ cd simple_chat
 $ yarn install
 
 ## サーバーの起動
-$ node src/server.js
+$ node src/index.html
 ```
 
 以上の手順でうまくいくと localhost:3000 にアクセスできる状態になっているはず...
