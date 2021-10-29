@@ -17,9 +17,9 @@ server.listen(PORT, () => {
 });
 
 io.on('connection', (socket) => {
+  console.log('user connected');
   socket.on('sendMessage', (message) => {
     console.log('Message has been sent: ', message);
-    // io.emit('receiveMessage', message);
-    socket.broadcast.emit('receiveMessage', message);
+    io.emit('receiveMessage', message);
   });
 });
